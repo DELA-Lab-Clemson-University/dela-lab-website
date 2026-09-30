@@ -21,7 +21,7 @@ window.DELA_DATA = {
       group: "Lab Director / Principal Investigator",
       role: "Director, DELA Lab",
       academicTitle: "Assistant Professor of Learning Sciences",
-      image: "",
+      image: "/static/images/people/joba-adisa.jpg",
       email: "",
       website: "",
       scholar: "",
