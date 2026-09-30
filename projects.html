@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Explore DELA Lab research projects in learning, design, emerging technologies, and analytics.">
+    <title>Projects | DELA Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div data-site-header></div>
+    <main id="main">
+        <header class="page-hero">
+            <p class="eyebrow">Our work</p>
+            <h1>Projects</h1>
+            <p>Research through which DELA investigates learning with and about emerging technologies.</p>
+        </header>
+        <section class="section">
+            <div class="project-grid" id="project-list"></div>
+        </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="data.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>document.querySelector('#project-list').innerHTML = DELA_DATA.projects.map(p => `<article class="project-card" id="${p.slug}"><div class="project-visual">${p.visual}</div><div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div><h2>${p.title}</h2><p>${p.description}</p><p><strong>Status:</strong> ${p.status}</p>${p.website ? `<a class="inline-link" href="${p.website}">Project website →</a>` : ''}</article>`).join('');</script>
+</body>
+
+</html>

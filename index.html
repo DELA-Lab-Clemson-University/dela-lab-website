@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="DELA Lab at Clemson University studies design, emerging technologies, learning, and analytics.">
+    <title>DELA Lab | Design, Emerging Technologies, Learning & Analytics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div data-site-header></div>
+    <main id="main">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Clemson University</p>
+                <h1>DELA Lab</h1>
+                <p>Design · Emerging Technologies · Learning · Analytics</p>
+                <p>We study how emerging technologies shape learning—and how thoughtful, collaborative design can
+                    support people learning with and about technology.</p>
+                <p><a class="button button-primary" href="projects.html">Explore our projects</a></p>
+            </div>
+            <div class="hero-visual" role="img"
+                aria-label="Placeholder for a DELA Lab group or research activity image"><span>[Add lab or research
+                    image]</span></div>
+        </section>
+        <section class="muted-section">
+            <div class="section">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Featured work</p>
+                        <h2>Research in practice</h2>
+                    </div><a class="inline-link" href="projects.html">View all projects →</a>
+                </div>
+                <div class="project-grid" id="home-projects"></div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-head">
+                <div>
+                    <p class="eyebrow">Latest</p>
+                    <h2>Recent News & Media</h2>
+                </div><a class="inline-link" href="news.html">View all news & media →</a>
+            </div>
+            <div class="news-list" id="home-news"></div>
+        </section>
+        <section class="section">
+            <div class="callout">
+                <div>
+                    <p class="eyebrow">Work with us</p>
+                    <h2>Interested in joining DELA Lab?</h2>
+                </div><a class="button" href="prospective-students.html">Learn more →</a>
+            </div>
+        </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="data.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const D = DELA_DATA;
+        document.querySelector("#home-projects").innerHTML = D.projects
+            .slice(0, 3)
+            .map(
+                (p) =>
+                    `<article class="project-card"><div class="project-visual">${p.visual}</div><div class="tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div><h3>${p.title}</h3><p>${p.description}</p><a class="inline-link" href="projects.html#${p.slug}">Learn more →</a></article>`,
+            )
+            .join("");
+        document.querySelector("#home-news").innerHTML = D.news
+            .slice(0, 4)
+            .map(
+                (n, i) =>
+                    `<article class="news-item"><button class="news-toggle" data-accordion-button aria-expanded="false" aria-controls="home-news-${i}"><span class="news-date">${n.date}</span><span class="news-title">${n.title}</span><span class="chevron" aria-hidden="true">+</span></button><div class="news-panel" id="home-news-${i}" hidden><p>${n.description}</p>${n.link ? `<a class="inline-link" href="${n.link}">${n.linkLabel}</a>` : ""}</div></article>`,
+            )
+            .join("");
+        initAccordions(document.querySelector("#home-news"));
+    </script>
+</body>
+
+</html>

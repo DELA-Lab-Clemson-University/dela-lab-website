@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Meet the researchers and collaborators of DELA Lab at Clemson University.">
+  <title>People | DELA Lab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div data-site-header></div>
+  <main id="main">
+    <header class="page-hero">
+      <p class="eyebrow">Our community</p>
+      <h1>People</h1>
+      <p>Researchers, educators, students, and designers bring different perspectives to shared questions about learning and technology.</p>
+    </header>
+    <section class="section" id="people-list"></section>
+  </main>
+  <div data-site-footer></div>
+  <script src="data.js"></script>
+  <script src="components.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const configuredGroups = DELA_DATA.peopleGroups || [];
+    const unlistedGroups = DELA_DATA.people
+      .map(person => person.group)
+      .filter(group => !configuredGroups.includes(group));
+    const groups = [...configuredGroups, ...new Set(unlistedGroups)]
+      .filter(group => DELA_DATA.people.some(person => person.group === group));
+    const peopleList = document.querySelector('#people-list');
+
+    peopleList.innerHTML = groups.map(group => {
+      const isDirectorGroup = group === 'Lab Director / Principal Investigator';
+      const people = DELA_DATA.people.filter(person => person.group === group);
+
+      return `<section class="people-section${isDirectorGroup ? ' director-section' : ''}">
+        <h2>${group}</h2>
+        <div class="people-grid">
+          ${people.map(person => {
+            const isPlaceholder = person.name.startsWith('[');
+            return `<a class="person-card${isPlaceholder ? ' placeholder-card' : ''}" href="profile.html?person=${person.slug}">
+              <div class="portrait">
+                ${person.image
+                  ? `<img src="${person.image}" alt="Portrait of ${person.name}">`
+                  : `<span class="photo-placeholder">${isPlaceholder ? '[Photo]' : person.name.split(' ').map(part => part[0]).join('')}</span>`}
+              </div>
+              ${isPlaceholder ? '<span class="placeholder-label">Editable placeholder</span>' : ''}
+              <h3>${person.name}</h3>
+              <p>${person.role}</p>
+              ${person.academicTitle ? `<p>${person.academicTitle}</p>` : ''}
+            </a>`;
+          }).join('')}
+        </div>
+      </section>`;
+    }).join('');
+  </script>
+</body>
+</html>

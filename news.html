@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="News, media, and updates from DELA Lab at Clemson University.">
+    <title>News & Media | DELA Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div data-site-header></div>
+    <main id="main">
+        <header class="page-hero">
+            <p class="eyebrow">Updates</p>
+            <h1>News & Media</h1>
+            <p>Research updates, publications, collaborations, events, and lab milestones.</p>
+        </header>
+        <section class="section">
+            <div class="news-list" id="news-list"></div>
+        </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="data.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.querySelector("#news-list").innerHTML = DELA_DATA.news
+            .map(
+                (n, i) =>
+                    `<article class="news-item"><button class="news-toggle" data-accordion-button aria-expanded="false" aria-controls="news-${i}"><span class="news-date">${n.date}</span><span class="news-title">${n.title}</span><span class="chevron" aria-hidden="true">+</span></button><div class="news-panel" id="news-${i}" hidden><p>${n.description}</p>${n.link ? `<a class="inline-link" href="${n.link}">${n.linkLabel}</a>` : ""}</div></article>`,
+            )
+            .join("");
+        initAccordions(document.querySelector("#news-list"));
+    </script>
+</body>
+
+</html>

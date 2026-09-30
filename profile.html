@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="DELA Lab member profile.">
+  <title>Profile | DELA Lab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div data-site-header></div>
+  <main id="main"><section class="section" id="profile"></section></main>
+  <div data-site-footer></div>
+  <script src="data.js"></script>
+  <script src="components.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const slug = new URLSearchParams(location.search).get('person');
+    const person = DELA_DATA.people.find(entry => entry.slug === slug) || DELA_DATA.people[0];
+    const isPlaceholder = person.name.startsWith('[');
+    document.title = `${person.name} | DELA Lab`;
+
+    const links = [
+      [person.email ? `mailto:${person.email}` : '', 'Email'],
+      [person.cv, 'CV'],
+      [person.scholar, 'Google Scholar'],
+      [person.website, 'Personal Website'],
+      [person.linkedin, 'LinkedIn']
+    ].filter(([url]) => url);
+
+    const selectedPublications = person.selectedPublications || [];
+    document.querySelector('#profile').innerHTML = `
+      <header class="profile-header">
+        <div class="portrait">
+          ${person.image
+            ? `<img src="${person.image}" alt="Portrait of ${person.name}">`
+            : `<span class="photo-placeholder">${isPlaceholder ? '[Photo]' : person.name.split(' ').map(part => part[0]).join('')}</span>`}
+        </div>
+        <div>
+          <p class="eyebrow">${person.group}</p>
+          ${isPlaceholder ? '<span class="placeholder-label">Editable placeholder profile</span>' : ''}
+          <h1>${person.name}</h1>
+          <p class="role">${person.role}</p>
+          ${person.academicTitle ? `<p>${person.academicTitle}</p>` : ''}
+          ${links.length ? `<div class="profile-links">${links.map(([url, label]) => `<a class="action-link" href="${url}">${label}</a>`).join('')}</div>` : ''}
+        </div>
+      </header>
+      <div class="content-grid profile-content">
+        <div>
+          <section class="content-section"><h2>Bio</h2><p>${person.bio}</p></section>
+          <section class="content-section"><h2>Research Interests</h2><div class="tags">${person.researchInterests.map(interest => `<span class="tag">${interest}</span>`).join('')}</div></section>
+          ${selectedPublications.length ? `<section class="content-section"><h2>Selected Publications</h2><div class="selected-publications">${selectedPublications.map(publication => `<article><h3>${publication.title}</h3>${publication.citation ? `<p>${publication.citation}</p>` : ''}${publication.url ? `<a class="inline-link" href="${publication.url}">View publication →</a>` : ''}</article>`).join('')}</div></section>` : ''}
+        </div>
+        <aside><section class="content-section"><h2>Education</h2>${person.education.map(item => `<p>${item}</p>`).join('')}</section></aside>
+      </div>`;
+  </script>
+</body>
+</html>

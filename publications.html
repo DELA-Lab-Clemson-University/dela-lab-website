@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Search and browse DELA Lab publications by year and type.">
+    <title>Publications | DELA Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div data-site-header></div>
+    <main id="main">
+        <header class="page-hero">
+            <p class="eyebrow">Research outputs</p>
+            <h1>Publications</h1>
+            <p>Peer-reviewed papers and scholarly work from the DELA Lab community.</p>
+        </header>
+        <section class="section">
+            <div class="filters"><label><span class="sr-only">Search publications</span><input id="pub-search"
+                        type="search" placeholder="Search publications…"></label><label><span class="sr-only">Filter by
+                        type</span><select id="pub-type">
+                        <option>All types</option>
+                    </select></label><label><span class="sr-only">Filter by year</span><select id="pub-year">
+                        <option>All years</option>
+                    </select></label></div>
+            <div id="publication-list" aria-live="polite"></div>
+        </section>
+    </main>
+    <div data-site-footer></div>
+    <dialog id="cite-dialog" aria-labelledby="cite-title">
+        <div class="modal-inner">
+            <div class="modal-head">
+                <h2 id="cite-title">Cite</h2><button class="modal-close" type="button"
+                    aria-label="Close citation dialog">×</button>
+            </div>
+            <div class="citation-text" id="citation-text"></div><button class="button button-primary" id="copy-citation"
+                type="button">Copy citation</button>
+            <p class="status" id="copy-status" aria-live="polite"></p>
+        </div>
+    </dialog>
+    <script src="data.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const pubs = DELA_DATA.publications, search = document.querySelector('#pub-search'), type = document.querySelector('#pub-type'), year = document.querySelector('#pub-year'), list = document.querySelector('#publication-list'), dialog = document.querySelector('#cite-dialog'), citation = document.querySelector('#citation-text');
+        [...new Set(pubs.map(p => p.type))].sort().forEach(v => type.add(new Option(v, v)));[...new Set(pubs.map(p => p.year))].sort((a, b) => b - a).forEach(v => year.add(new Option(v, v)));
+        function resourceLinks(p, i) { const fields = [['pdf', 'PDF'], ['doi', 'DOI'], ['slides', 'Slides'], ['video', 'Video'], ['project', 'Project'], ['conferenceWebsite', 'Conference Website'], ['supplementaryMaterial', 'Supplementary Material']]; return fields.filter(([k]) => p[k]).map(([k, l]) => `<a class="action-link" href="${p[k]}">${l}</a>`).join('') + (p.citationAPA ? `<button class="action-link cite-button" type="button" data-index="${i}">Cite</button>` : ''); }
+        function render() { const q = search.value.toLowerCase().trim(), filtered = pubs.filter(p => { const hay = [p.title, p.authors, p.venue, ...(p.keywords || [])].join(' ').toLowerCase(); return (!q || hay.includes(q)) && (type.value === 'All types' || p.type === type.value) && (year.value === 'All years' || String(p.year) === year.value) }); if (!filtered.length) { list.innerHTML = '<p class="empty-state">No publications match these filters.</p>'; return; } const years = [...new Set(filtered.map(p => p.year))].sort((a, b) => b - a); list.innerHTML = years.map((y, yi) => `<section class="year-group"><button class="year-toggle" data-accordion-button aria-expanded="${yi < 2}" aria-controls="year-${y}"><span>${y}</span><span aria-hidden="true">+</span></button><div class="year-panel" id="year-${y}" ${yi < 2 ? '' : 'hidden'}>${filtered.filter(p => p.year === y).map(p => { const i = pubs.indexOf(p); return `<article class="publication"><h3>${p.title}</h3><p>${p.authors}</p><p><em>${p.venue}</em> · ${p.year}</p>${p.summary ? `<p>${p.summary}</p>` : ''}<div class="pub-actions">${resourceLinks(p, i)}</div></article>` }).join('')}</div></section>`).join(''); initAccordions(list); list.querySelectorAll('.cite-button').forEach(b => b.addEventListener('click', () => { citation.innerHTML = pubs[b.dataset.index].citationAPA; dialog.showModal(); })); }
+        [search, type, year].forEach(el => el.addEventListener(el === search ? 'input' : 'change', render)); render(); document.querySelector('.modal-close').onclick = () => dialog.close(); dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close() }); document.querySelector('#copy-citation').onclick = async () => { const status = document.querySelector('#copy-status'); try { await navigator.clipboard.writeText(citation.innerText); status.textContent = 'Copied!'; } catch { status.textContent = 'Select the citation above and copy it manually.'; } };
+    </script>
+</body>
+
+</html>
