@@ -11,3 +11,5 @@ People categories are controlled by `peopleGroups`. A category appears on the Pe
 Replace all bracketed placeholder content before launch, especially contact details, profile biography and education, publication metadata, news, and images.
 
 Preview locally with `python3 -m http.server`, then open the displayed localhost address.
+
+This is a test for github process. 
