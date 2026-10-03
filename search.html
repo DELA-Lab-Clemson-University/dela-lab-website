@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Search DELA Lab pages, projects, people, publications, and news.">
+    <title>Search | DELA Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div data-site-header></div>
+    <main id="main">
+        <header class="page-hero">
+            <p class="eyebrow">DELA Lab</p>
+            <h1>Search</h1>
+            <p id="search-summary" aria-live="polite"></p>
+        </header>
+        <section class="section container" aria-label="Search results">
+            <div id="search-results" class="search-results"></div>
+        </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="data.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const query = new URLSearchParams(location.search).get("q")?.trim() || "";
+        const summary = document.querySelector("#search-summary");
+        const results = document.querySelector("#search-results");
+        const entries = [
+            { title: "Home", url: "index.html", text: "DELA Lab design emerging technologies learning analytics Clemson University" },
+            { title: "Research", url: "research.html", text: "Research areas approach design learning emerging technologies analytics" },
+            { title: "About", url: "about.html", text: "About DELA Lab Clemson University education human development" },
+            { title: "Prospective Students", url: "prospective-students.html", text: "Students join DELA Lab graduate undergraduate opportunities" },
+            { title: "Contact", url: "contact.html", text: "Contact DELA Lab Clemson University" },
+            ...DELA_DATA.projects.map(item => ({ title: item.title, url: `projects.html#${item.slug}`, text: `${item.description} ${item.status} ${item.tags.join(" ")}` })),
+            ...DELA_DATA.people.filter(item => !item.slug.includes("placeholder")).map(item => ({ title: item.name, url: `profile.html?person=${encodeURIComponent(item.slug)}`, text: `${item.role} ${item.academicTitle} ${item.bio} ${(item.researchInterests || []).join(" ")}` })),
+            ...DELA_DATA.publications.map(item => ({ title: item.title, url: "publications.html", text: `${item.authors} ${item.venue} ${item.year} ${item.summary} ${(item.keywords || []).join(" ")}` })),
+            ...DELA_DATA.news.map(item => ({ title: item.title, url: "news.html", text: `${item.description} ${item.category} ${item.date}` }))
+        ];
+        if (!query) {
+            summary.textContent = "Enter a search term in the navigation bar to find site content.";
+        } else {
+            const terms = query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+            const matches = entries.filter(item => terms.every(term => `${item.title} ${item.text}`.toLocaleLowerCase().includes(term)));
+            summary.textContent = `${matches.length} result${matches.length === 1 ? "" : "s"} for “${query}”`;
+            if (matches.length) {
+                const list = document.createElement("ul");
+                list.className = "search-result-list";
+                matches.forEach(item => {
+                    const li = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = item.url;
+                    link.textContent = item.title;
+                    const description = document.createElement("p");
+                    description.textContent = item.text;
+                    li.append(link, description);
+                    list.append(li);
+                });
+                results.append(list);
+            } else {
+                results.textContent = "No results found. Try a different search term.";
+            }
+        }
+        const searchInput = document.querySelector("#site-search-input");
+        if (searchInput) searchInput.value = query;
+    </script>
+</body>
+</html>
