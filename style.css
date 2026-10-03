@@ -745,18 +745,6 @@ dialog::backdrop {
         display: none;
     }
 }
-.director-section .people-grid {
-    grid-template-columns: minmax(280px, 520px);
-}
-.director-section .person-card {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    column-gap: 28px;
-    align-items: start;
-}
-.director-section .portrait {
-    grid-row: 1/6;
-}
 .photo-placeholder {
     font-family: var(--sans);
     font-size: 0.8rem;
@@ -790,11 +778,6 @@ dialog::backdrop {
     font-family: var(--serif);
     font-size: 1.15rem;
     margin: 0 0 6px;
-}
-@media (max-width: 700px) {
-    .director-section .person-card {
-        display: block;
-    }
 }
 @media (prefers-reduced-motion: reduce) {
     * {
