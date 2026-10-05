@@ -18,21 +18,21 @@
     <section class="section" id="people-list"></section>
   </main>
   <div data-site-footer></div>
-  <script src="js/data.js"></script>
+  <script src="js/people.js"></script>
   <script src="js/components.js"></script>
   <script src="js/script.js"></script>
   <script>
-    const configuredGroups = DELA_DATA.peopleGroups || [];
-    const unlistedGroups = DELA_DATA.people
+    const configuredGroups = DELA_PEOPLE_GROUPS || [];
+    const unlistedGroups = DELA_PEOPLE
       .map(person => person.group)
       .filter(group => !configuredGroups.includes(group));
     const groups = [...configuredGroups, ...new Set(unlistedGroups)]
-      .filter(group => DELA_DATA.people.some(person => person.group === group));
+      .filter(group => DELA_PEOPLE.some(person => person.group === group));
     const peopleList = document.querySelector('#people-list');
 
     peopleList.innerHTML = groups.map(group => {
       const isDirectorGroup = group === 'Lab Director / Principal Investigator';
-      const people = DELA_DATA.people.filter(person => person.group === group);
+      const people = DELA_PEOPLE.filter(person => person.group === group);
 
       return `<section class="people-section${isDirectorGroup ? ' director-section' : ''}">
         <h2>${group}</h2>

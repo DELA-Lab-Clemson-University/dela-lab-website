@@ -20,7 +20,10 @@
         </section>
     </main>
     <div data-site-footer></div>
-    <script src="js/data.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/people.js"></script>
+    <script src="js/publications.js"></script>
+    <script src="js/news.js"></script>
     <script src="js/components.js"></script>
     <script src="js/script.js"></script>
     <script>
@@ -33,10 +36,10 @@
             { title: "About", url: "about.html", text: "About DELA Lab Clemson University education human development" },
             { title: "Prospective Students", url: "prospective-students.html", text: "Students join DELA Lab graduate undergraduate opportunities" },
             { title: "Contact", url: "contact.html", text: "Contact DELA Lab Clemson University" },
-            ...DELA_DATA.projects.map(item => ({ title: item.title, url: `projects/projects.html#${item.slug}`, text: `${item.description} ${item.status} ${item.tags.join(" ")}` })),
-            ...DELA_DATA.people.filter(item => !item.slug.includes("placeholder")).map(item => ({ title: item.name, url: `profile.html?person=${encodeURIComponent(item.slug)}`, text: `${item.role} ${item.academicTitle} ${item.bio} ${(item.researchInterests || []).join(" ")}` })),
-            ...DELA_DATA.publications.map(item => ({ title: item.title, url: "publications.html", text: `${item.authors} ${item.venue} ${item.year} ${item.summary} ${(item.keywords || []).join(" ")}` })),
-            ...DELA_DATA.news.map(item => ({ title: item.title, url: "news.html", text: `${item.description} ${item.category} ${item.date}` }))
+            ...DELA_PROJECTS.map(item => ({ title: item.title, url: `projects/projects.html#${item.slug}`, text: `${item.description} ${item.status} ${item.tags.join(" ")}` })),
+            ...DELA_PEOPLE.filter(item => !item.slug.includes("placeholder")).map(item => ({ title: item.name, url: `profile.html?person=${encodeURIComponent(item.slug)}`, text: `${item.role} ${item.academicTitle} ${item.bio} ${(item.researchInterests || []).join(" ")}` })),
+            ...DELA_PUBLICATIONS.map(item => ({ title: item.title, url: "publications.html", text: `${item.authors} ${item.venue} ${item.year} ${item.summary} ${(item.keywords || []).join(" ")}` })),
+            ...DELA_NEWS.map(item => ({ title: item.title, url: "news.html", text: `${item.description} ${item.category} ${item.date}` }))
         ];
         if (!query) {
             summary.textContent = "Enter a search term in the navigation bar to find site content.";

@@ -22,11 +22,11 @@
         </section>
     </main>
     <div data-site-footer></div>
-    <script src="js/data.js"></script>
+    <script src="js/news.js"></script>
     <script src="js/components.js"></script>
     <script src="js/script.js"></script>
     <script>
-        document.querySelector("#news-list").innerHTML = DELA_DATA.news
+        document.querySelector("#news-list").innerHTML = DELA_NEWS
             .map(
                 (n, i) =>
                     `<article class="news-item"><button class="news-toggle" data-accordion-button aria-expanded="false" aria-controls="news-${i}"><span class="news-date">${n.date}</span><span class="news-title">${n.title}</span><span class="chevron" aria-hidden="true">+</span></button><div class="news-panel" id="news-${i}" hidden><p>${n.description}</p>${n.link ? `<a class="inline-link" href="${n.link}">${n.linkLabel}</a>` : ""}</div></article>`,

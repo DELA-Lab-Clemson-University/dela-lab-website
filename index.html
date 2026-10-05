@@ -56,11 +56,12 @@
         </section>
     </main>
     <div data-site-footer></div>
-    <script src="js/data.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/news.js"></script>
     <script src="js/components.js"></script>
     <script src="js/script.js"></script>
     <script>
-        const D = DELA_DATA;
+        const D = { projects: DELA_PROJECTS, news: DELA_NEWS };
         document.querySelector("#home-projects").innerHTML = D.projects
             .slice(0, 3)
             .map(

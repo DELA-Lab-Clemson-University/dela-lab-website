@@ -11,12 +11,12 @@
   <div data-site-header></div>
   <main id="main"><section class="section" id="profile"></section></main>
   <div data-site-footer></div>
-  <script src="js/data.js"></script>
+  <script src="js/people.js"></script>
   <script src="js/components.js"></script>
   <script src="js/script.js"></script>
   <script>
     const slug = new URLSearchParams(location.search).get('person');
-    const person = DELA_DATA.people.find(entry => entry.slug === slug) || DELA_DATA.people[0];
+    const person = DELA_PEOPLE.find(entry => entry.slug === slug) || DELA_PEOPLE[0];
     const isPlaceholder = person.name.startsWith('[');
     document.title = `${person.name} | DELA Lab`;
 
