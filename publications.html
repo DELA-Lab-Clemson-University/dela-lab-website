@@ -40,9 +40,9 @@
             <p class="status" id="copy-status" aria-live="polite"></p>
         </div>
     </dialog>
-    <script src="data.js"></script>
-    <script src="components.js"></script>
-    <script src="script.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/script.js"></script>
     <script>
         const pubs = DELA_DATA.publications, search = document.querySelector('#pub-search'), type = document.querySelector('#pub-type'), year = document.querySelector('#pub-year'), list = document.querySelector('#publication-list'), dialog = document.querySelector('#cite-dialog'), citation = document.querySelector('#citation-text');
         [...new Set(pubs.map(p => p.type))].sort().forEach(v => type.add(new Option(v, v)));[...new Set(pubs.map(p => p.year))].sort((a, b) => b - a).forEach(v => year.add(new Option(v, v)));
