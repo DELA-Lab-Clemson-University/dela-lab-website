@@ -4,7 +4,7 @@ A dependency-free static site for DELA Lab at Clemson University.
 
 ## Editing content
 
-Update `data.js` to add or edit projects, people, publications, and news. The pages render from those shared records, so content does not need to be duplicated.
+Update `js/data.js` to add or edit projects, people, publications, and news. The pages render from those shared records, so content does not need to be duplicated.
 
 People categories are controlled by `peopleGroups`. A category appears on the People page only when at least one entry in `people` uses that exact group name. Empty categories remain hidden automatically.
 
