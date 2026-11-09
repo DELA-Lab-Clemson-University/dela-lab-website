@@ -25,6 +25,7 @@
       [person.cv, 'CV'],
       [person.scholar, 'Google Scholar'],
       [person.website, 'Personal Website'],
+      [person.github, 'GitHub'],
       [person.linkedin, 'LinkedIn']
     ].filter(([url]) => url);
 
@@ -42,7 +43,7 @@
           <h1>${person.name}</h1>
           <p class="role">${person.role}</p>
           ${person.academicTitle ? `<p>${person.academicTitle}</p>` : ''}
-          ${links.length ? `<div class="profile-links">${links.map(([url, label]) => `<a class="action-link" href="${url}">${label}</a>`).join('')}</div>` : ''}
+          ${links.length ? `<div class="profile-links">${links.map(([url, label]) => `<a class="action-link" href="${url}"${url.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${label}</a>`).join('')}</div>` : ''}
         </div>
       </header>
       <div class="content-grid profile-content">
@@ -51,7 +52,10 @@
           <section class="content-section"><h2>Research Interests</h2><div class="tags">${person.researchInterests.map(interest => `<span class="tag">${interest}</span>`).join('')}</div></section>
           ${selectedPublications.length ? `<section class="content-section"><h2>Selected Publications</h2><div class="selected-publications">${selectedPublications.map(publication => `<article><h3>${publication.title}</h3>${publication.citation ? `<p>${publication.citation}</p>` : ''}${publication.url ? `<a class="inline-link" href="${publication.url}">View publication →</a>` : ''}</article>`).join('')}</div></section>` : ''}
         </div>
-        <aside><section class="content-section"><h2>Education</h2>${person.education.map(item => `<p>${item}</p>`).join('')}</section></aside>
+        <aside>
+          ${person.postdoctoralTraining?.length ? `<section class="content-section"><h2>Postdoctoral Training</h2>${person.postdoctoralTraining.map(item => `<p>${item}</p>`).join('')}</section>` : ''}
+          <section class="content-section"><h2>Education</h2>${person.education.map(item => `<p>${item}</p>`).join('')}</section>
+        </aside>
       </div>`;
   </script>
 </body>

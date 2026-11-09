@@ -1,14 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
 
 :root {
-    --paper: #faf9f6;
-    --surface: #fff;
-    --ink: #20201e;
-    --muted: #66645f;
-    --line: #dedbd3;
-    --accent: #b94712;
-    --soft: #f1eee7;
-    --dark: #20211f;
+    --navy: #03233e;
+    --navy-deep: #021b30;
+    --navy-light: #062d50;
+    --teal: #00969a;
+    --teal-light: #069b9e;
+    --teal-text: #00777a;
+    --orange: #fd7e12;
+    --orange-text: #a94700;
+    --gray: #bdc0c3;
+    --white: #ffffff;
+    --paper: var(--white);
+    --surface: var(--white);
+    --ink: var(--navy);
+    --muted: #52657a;
+    --line: var(--gray);
+    --accent: var(--orange);
+    --secondary: var(--teal-text);
+    --soft: #f2f6f7;
+    --dark: var(--navy);
+    --footer-text: #d7e1e8;
+    --overlay: rgba(3, 35, 62, 0.72);
     --max: 1180px;
     --radius: 8px;
     --sans: Inter, Arial, sans-serif;
@@ -41,7 +54,7 @@ select {
     font: inherit;
 }
 :focus-visible {
-    outline: 3px solid #e87722;
+    outline: 3px solid var(--orange);
     outline-offset: 3px;
 }
 .sr-only {
@@ -61,21 +74,21 @@ select {
     top: -5rem;
     z-index: 100;
     background: var(--dark);
-    color: #fff;
+    color: var(--white);
     padding: 0.7rem 1rem;
 }
 .skip-link:focus {
     top: 1rem;
 }
 .site-header {
-    min-height: 110px;
-    padding: 14px max(24px, calc((100vw - var(--max)) / 2));
+    min-height: 112px;
+    padding: 16px max(24px, calc((100vw - var(--max)) / 2));
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 32px;
-    border-bottom: 1px solid var(--line);
-    background: rgba(250, 249, 246, 0.97);
+    border-bottom: 3px solid var(--teal);
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
     position: sticky;
     top: 0;
     z-index: 20;
@@ -87,17 +100,18 @@ select {
     line-height: 1.15;
     flex: 0 0 auto;
 }
-.brand-name {
-    font-family: Playfair Display, Arial, sans-serif;
-    font-weight: 900;
-    font-size: 1.95rem;
+.brand-logo {
+    width: 240px;
+    height: 68px;
+    object-fit: cover;
+    object-position: center;
 }
 .brand-tagline {
-    font-family: Playfair Display, Arial, sans-serif;
-    font-size: 1rem;
+    font-family: var(--sans);
+    font-size: 0.68rem;
     letter-spacing: 0.06em;
-    color: var(--muted);
-    margin-top: 5px;
+    color: var(--footer-text);
+    margin-top: 3px;
 }
 .nav {
     display: flex;
@@ -110,17 +124,18 @@ select {
     font-weight: 650;
     white-space: nowrap;
     border-bottom: 2px solid transparent;
+    color: var(--white);
     padding: 7px 0;
 }
 .nav a:hover,
 .nav a[aria-current="page"] {
-    color: var(--accent);
-    border-color: var(--accent);
+    color: var(--white);
+    border-color: var(--orange);
 }
 .site-search {
     display: flex;
     align-items: center;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 4px;
     background: var(--surface);
     margin-left: 0px;
@@ -138,7 +153,7 @@ select {
     border: 0;
     background: transparent;
     padding: 4px 9px;
-    color: var(--muted);
+    color: var(--navy);
     cursor: pointer;
     font-size: 1.1rem;
 }
@@ -154,7 +169,7 @@ select {
     padding-bottom: 20px;
 }
 .search-result-list a {
-    color: var(--accent);
+    color: var(--secondary);
     font-family: var(--serif);
     font-size: 1.35rem;
     font-weight: 700;
@@ -165,11 +180,11 @@ select {
 }
 .menu-toggle {
     display: none;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     background: transparent;
     border-radius: 4px;
     padding: 8px 12px;
-    color: var(--ink);
+    color: var(--white);
 }
 main {
     min-height: 55vh;
@@ -188,7 +203,7 @@ main {
 }
 .eyebrow {
     margin: 0 0 16px;
-    color: var(--accent);
+    color: var(--secondary);
     text-transform: uppercase;
     letter-spacing: 0.14em;
     font-weight: 700;
@@ -242,7 +257,7 @@ main {
     content: "DELA";
     font-family: var(--serif);
     font-size: clamp(4rem, 10vw, 8rem);
-    color: #d8d2c5;
+    color: var(--gray);
 }
 .hero-visual span {
     position: absolute;
@@ -266,20 +281,21 @@ main {
 }
 .button-primary {
     background: var(--ink);
-    color: #fff;
+    color: var(--white);
 }
 .button:hover,
 .action-link:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: var(--secondary);
+    color: var(--secondary);
 }
 .button-primary:hover {
     background: var(--accent);
-    color: #fff;
+    border-color: var(--accent);
+    color: var(--navy);
 }
 .inline-link {
     font-weight: 700;
-    color: var(--accent);
+    color: var(--secondary);
 }
 .section-head {
     display: flex;
@@ -310,7 +326,7 @@ main {
     gap: 28px;
 }
 .project-card {
-    border-top: 3px solid var(--accent);
+    border-top: 3px solid var(--secondary);
     padding-top: 20px;
 }
 .project-card-link {
@@ -320,11 +336,11 @@ main {
 }
 .project-card-link:hover h2,
 .project-card-link:hover h3 {
-    color: var(--accent);
+    color: var(--secondary);
 }
 .project-visual {
     height: 170px;
-    background: #e9e6d9;
+    background: var(--soft);
     display: flex;
     align-items: end;
     padding: 18px;
@@ -373,7 +389,7 @@ main {
     place-items: center;
     padding: 24px;
     background: var(--soft);
-    border: 1px dashed #b9b3a7;
+    border: 1px dashed var(--gray);
     color: var(--muted);
     text-align: center;
 }
@@ -433,7 +449,7 @@ main {
     font-size: 0.9rem;
 }
 .data-project-sidebar a:hover {
-    color: var(--accent);
+    color: var(--secondary);
 }
 .data-project-section {
     display: grid;
@@ -464,10 +480,11 @@ main {
 }
 .tag {
     background: var(--soft);
+    border: 1px solid rgba(0, 150, 154, 0.24);
     border-radius: 100px;
     padding: 4px 9px;
     font-size: 0.73rem;
-    color: var(--muted);
+    color: var(--navy-light);
 }
 .news-list {
     display: grid;
@@ -491,7 +508,7 @@ main {
     color: inherit;
 }
 .news-date {
-    color: var(--accent);
+    color: var(--secondary);
     font-size: 0.82rem;
     font-weight: 700;
 }
@@ -539,10 +556,10 @@ main {
 }
 .portrait {
     aspect-ratio: 4/4;
-    background: #e4dfd6;
+    background: var(--soft);
     display: grid;
     place-items: center;
-    color: #858078;
+    color: var(--muted);
     font-family: var(--serif);
     font-size: 2rem;
     overflow: hidden;
@@ -608,7 +625,7 @@ main {
 .filters select {
     width: 100%;
     border: 1px solid var(--line);
-    background: #fff;
+    background: var(--white);
     padding: 12px;
     border-radius: 4px;
 }
@@ -643,6 +660,10 @@ main {
     margin: 5px 0;
     color: var(--muted);
 }
+.publication .publication-note {
+    color: var(--teal);
+    font-weight: 700;
+}
 .empty-state {
     padding: 35px 0;
     color: var(--muted);
@@ -653,10 +674,10 @@ dialog {
     padding: 0;
     max-width: 620px;
     width: calc(100% - 32px);
-    box-shadow: 0 20px 70px #0004;
+    box-shadow: 0 20px 70px rgba(3, 35, 62, 0.22);
 }
 dialog::backdrop {
-    background: #15151599;
+    background: var(--overlay);
 }
 .modal-inner {
     padding: 30px;
@@ -684,7 +705,7 @@ dialog::backdrop {
 }
 .status {
     min-height: 1.5em;
-    color: var(--accent);
+    color: var(--secondary);
     font-weight: 700;
 }
 .two-column {
@@ -705,12 +726,13 @@ dialog::backdrop {
     color: var(--muted);
 }
 .placeholder-text {
-    color: #b14617;
+    color: var(--orange-text);
     font-style: italic;
 }
 .site-footer {
-    background: var(--dark);
-    color: #d5d5d0;
+    background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+    color: var(--footer-text);
+    border-top: 4px solid var(--teal);
     padding: 62px max(24px, calc((100vw - var(--max)) / 2)) 25px;
 }
 .footer-grid {
@@ -720,14 +742,24 @@ dialog::backdrop {
 }
 .site-footer h2 {
     font-family: var(--serif);
-    color: #fff;
+    color: var(--white);
     font-size: 1.2rem;
     margin: 0 0 15px;
 }
 .site-footer p,
 .site-footer a {
     font-size: 0.85rem;
-    color: #bdbdb7;
+    color: var(--footer-text);
+}
+.footer-logo {
+    width: 260px;
+    height: 74px;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 16px;
+}
+.site-footer a:hover {
+    color: var(--white);
 }
 .footer-links {
     display: grid;
@@ -735,11 +767,11 @@ dialog::backdrop {
     gap: 6px 18px;
 }
 .footer-bottom {
-    border-top: 1px solid #444;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     margin-top: 45px;
     padding-top: 20px;
     font-size: 0.78rem;
-    color: #999;
+    color: var(--footer-text);
 }
 .legacy-note {
     max-width: 800px;
@@ -760,11 +792,11 @@ dialog::backdrop {
     .nav {
         display: none;
         position: absolute;
-        top: 99px;
+        top: 100%;
         left: 0;
         right: 0;
-        background: var(--paper);
-        border-bottom: 1px solid var(--line);
+        background: var(--navy-deep);
+        border-bottom: 3px solid var(--teal);
         padding: 20px 24px;
         flex-direction: column;
         align-items: stretch;
@@ -905,7 +937,7 @@ dialog::backdrop {
     display: inline-block;
     width: max-content;
     margin-top: 12px;
-    color: var(--accent);
+    color: var(--orange-text);
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.08em;
