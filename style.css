@@ -228,12 +228,12 @@ main {
     margin: 24px 0 0;
 }
 .hero {
-    width: min(var(--max), calc(100% - 48px));
+    width: min(1340px, calc(100% - 48px));
     margin: auto;
     padding: 84px 0 96px;
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 8vw;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: clamp(48px, 5vw, 72px);
     align-items: center;
 }
 .hero h1 {
@@ -245,7 +245,7 @@ main {
     max-width: 620px;
 }
 .hero-visual {
-    aspect-ratio: 4/3;
+    aspect-ratio: 16/9;
     background: var(--soft);
     border: 1px solid var(--line);
     position: relative;
