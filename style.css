@@ -87,8 +87,9 @@ select {
     align-items: center;
     justify-content: space-between;
     gap: 32px;
-    border-bottom: 3px solid var(--teal);
-    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    border-bottom: 1px solid #d9dde1;
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 64%, #f5f6f7 100%);
+    box-shadow: 0 5px 14px rgba(3, 35, 62, 0.14);
     position: sticky;
     top: 0;
     z-index: 20;
@@ -101,9 +102,9 @@ select {
     flex: 0 0 auto;
 }
 .brand-logo {
-    width: 240px;
-    height: 68px;
-    object-fit: cover;
+    width: 320px;
+    height: 80px;
+    object-fit: contain;
     object-position: center;
 }
 .brand-tagline {
@@ -115,7 +116,7 @@ select {
 }
 .nav {
     display: flex;
-    gap: 40px;
+    gap: 30px;
     align-items: center;
 }
 .nav a {
@@ -124,18 +125,18 @@ select {
     font-weight: 650;
     white-space: nowrap;
     border-bottom: 2px solid transparent;
-    color: var(--white);
+    color: var(--navy);
     padding: 7px 0;
 }
 .nav a:hover,
 .nav a[aria-current="page"] {
-    color: var(--white);
+    color: var(--navy);
     border-color: var(--orange);
 }
 .site-search {
     display: flex;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(3, 35, 62, 0.28);
     border-radius: 4px;
     background: var(--surface);
     margin-left: 0px;
@@ -180,11 +181,11 @@ select {
 }
 .menu-toggle {
     display: none;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(3, 35, 62, 0.35);
     background: transparent;
     border-radius: 4px;
     padding: 8px 12px;
-    color: var(--white);
+    color: var(--navy);
 }
 main {
     min-height: 55vh;
@@ -832,8 +833,9 @@ dialog::backdrop {
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--navy-deep);
-        border-bottom: 3px solid var(--teal);
+        background: linear-gradient(180deg, #ffffff 0%, #f5f6f7 100%);
+        border-bottom: 1px solid #d9dde1;
+        box-shadow: 0 8px 14px rgba(3, 35, 62, 0.12);
         padding: 20px 24px;
         flex-direction: column;
         align-items: stretch;
