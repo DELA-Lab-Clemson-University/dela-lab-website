@@ -1011,7 +1011,12 @@ dialog::backdrop {
     gap: 12px;
     margin-top: 28px;
 }
+.students-jump-links .button,
+.students-contact .button {
+    font-size: 0.95rem;
+}
 .students-section {
+    font-size: 1.0625rem;
     padding-block: clamp(48px, 7vw, 80px);
     scroll-margin-top: 6rem;
 }
