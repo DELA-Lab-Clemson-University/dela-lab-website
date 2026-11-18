@@ -1001,3 +1001,67 @@ dialog::backdrop {
         transition: none !important;
     }
 }
+
+.students-hero {
+    background: var(--soft);
+}
+.students-jump-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+.students-section {
+    padding-block: clamp(48px, 7vw, 80px);
+    scroll-margin-top: 6rem;
+}
+.students-section + .students-section {
+    border-top: 1px solid var(--line);
+}
+.students-grid,
+.students-programs {
+    display: grid;
+    gap: clamp(24px, 4vw, 48px);
+}
+.students-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.students-programs {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+}
+.students-grid > section,
+.students-programs > section {
+    border-top: 2px solid var(--secondary);
+    padding-top: 18px;
+}
+.students-section h3 {
+    font: 500 1.5rem/1.2 var(--serif);
+    margin: 0;
+}
+.students-section p {
+    color: var(--muted);
+    max-width: 68ch;
+    margin: 12px 0 0;
+}
+.students-programs > section > a {
+    display: inline-block;
+    margin-top: 16px;
+}
+.students-contact {
+    background: var(--soft);
+    border-left: 4px solid var(--secondary);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-top: 36px;
+    padding: clamp(18px, 4vw, 36px);
+}
+.students-contact .button {
+    display: inline-block;
+    overflow-wrap: anywhere;
+    margin-block: 16px 4px;
+}
+@media (max-width: 700px) {
+    .students-grid,
+    .students-programs {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
